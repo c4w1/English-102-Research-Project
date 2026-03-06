@@ -352,7 +352,7 @@ function ArchiveFeedModal({ open, onClose }: ArchiveFeedModalProps) {
                         animate={{ scale: 1, y: 0 }}
                         exit={{ scale: 0.9, y: 20 }}
                         className="relative z-10 bg-black border border-yellow-400/40 max-w-2xl w-full p-8"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     >
                         <button
                             onClick={onClose}
