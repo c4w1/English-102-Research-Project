@@ -59,6 +59,15 @@ interface ArchiveLinkProps {
     children: React.ReactNode;
 }
 
+interface PrimarySourceCardProps {
+    id: string;
+    title: string;
+    date: string;
+    description: string;
+    link?: string;
+    type: "text" | "video" | "image" | "artifact";
+}
+
 interface ArchiveFeedModalProps {
     open: boolean;
     onClose: () => void;
@@ -108,6 +117,7 @@ function Navbar() {
         { name: "TECH", id: "tech", icon: <Tv className="w-4 h-4" /> },
         { name: "PERFORM", id: "performance", icon: <Users className="w-4 h-4" /> },
         { name: "NOW", id: "now", icon: <Smartphone className="w-4 h-4" /> },
+        { name: "CITATIONS", id: "works-cited", icon: <Quote className="w-4 h-4" /> },
     ];
 
     const scrollTo = (id: string) => {
@@ -161,7 +171,7 @@ function Navbar() {
                 </div>
 
                 <div className="px-4 py-1.5 border border-yellow-400 text-yellow-400 font-bold text-[10px] tracking-widest uppercase">
-                    EN 102 PROJECT
+                    VIRTUAL EXHIBIT
                 </div>
             </div>
         </nav>
@@ -332,6 +342,32 @@ function ArchiveLink({ href, children }: ArchiveLinkProps) {
     );
 }
 
+function PrimarySourceCard({ id, title, date, description, link, type }: PrimarySourceCardProps) {
+    return (
+        <div className="p-6 bg-white/5 border border-white/10 hover:border-yellow-400 transition-all group">
+            <div className="flex justify-between items-start mb-4">
+                <span className="text-[10px] font-black text-yellow-400 uppercase tracking-widest">
+                    Source {id} // {type}
+                </span>
+                <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">
+                    {date}
+                </span>
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2 uppercase tracking-wide group-hover:text-yellow-400 transition-colors">
+                {title}
+            </h4>
+            <p className="text-xs text-white/50 leading-relaxed mb-4 italic">
+                {description}
+            </p>
+            {link && (
+                <ArchiveLink href={link}>
+                    View Original Archive
+                </ArchiveLink>
+            )}
+        </div>
+    );
+}
+
 // ─── Archive Feed Modal ───────────────────────────────────────────────────────
 
 function ArchiveFeedModal({ open, onClose }: ArchiveFeedModalProps) {
@@ -373,15 +409,15 @@ function ArchiveFeedModal({ open, onClose }: ArchiveFeedModalProps) {
                             <div className="text-center">
                                 <Play className="w-12 h-12 text-yellow-400 mx-auto mb-3 opacity-60" />
                                 <p className="text-white/30 text-xs uppercase tracking-widest">
-                                    Helicopter Broadcast Feed
+                                    Stage 10 Official Highlights
                                 </p>
                                 <a
-                                    href="https://www.youtube.com/watch?v=S2807f4n_6U"
+                                    href="https://www.youtube.com/watch?v=4dBvJkqv0DM"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="mt-4 inline-block px-4 py-2 bg-yellow-400 text-black text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors"
+                                    className="mt-4 inline-block px-4 py-2 bg-yellow-400 text-black text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors relative z-20"
                                 >
-                                    Watch on YouTube →
+                                    Watch the Collision Incident →
                                 </a>
                             </div>
                         </div>
@@ -450,7 +486,7 @@ function VisualCompressionGrid() {
                 "The race is now simultaneous with its global broadcast. A fan on Alpe d'Huez knows they are live on television in 120 countries. This is the moment the spectator becomes a performer. Guerini's crash and the fan's camera are the same event.",
         },
         {
-            year: "2024",
+            year: "2026",
             tech: "4K HDR + 360° on-board",
             delay: "Real-time + VOD",
             reach: "Global + algorithmic",
@@ -460,18 +496,17 @@ function VisualCompressionGrid() {
     ];
 
     return (
-        <div>
-            <div className="grid grid-cols-2 gap-2 mb-4">
-                {eras.map((era, i) => (
+        <div className="grid grid-cols-1 gap-2">
+            {eras.map((era, i) => (
+                <React.Fragment key={era.year}>
                     <motion.div
-                        key={era.year}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
                         onClick={() =>
                             setSelected(selected?.year === era.year ? null : era)
                         }
                         className={cn(
-                            "aspect-square p-4 flex flex-col justify-between cursor-pointer transition-all border",
+                            "p-4 flex flex-col justify-between cursor-pointer transition-all border",
                             i === 3
                                 ? "bg-yellow-400 text-black border-yellow-400"
                                 : "bg-white/5 border-white/10",
@@ -487,7 +522,7 @@ function VisualCompressionGrid() {
               {era.year}
             </span>
                         <div
-                            className="h-px w-full"
+                            className="h-px w-full my-2"
                             style={{
                                 background:
                                     i === 3 ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.1)",
@@ -504,38 +539,38 @@ function VisualCompressionGrid() {
                             {era.delay}
                         </p>
                     </motion.div>
-                ))}
-            </div>
 
-            <AnimatePresence>
-                {selected && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden"
-                    >
-                        <div className="p-4 bg-yellow-400/5 border border-yellow-400/30 border-t-0">
-                            <div className="flex justify-between items-start mb-2">
-                <span className="text-yellow-400 font-black text-lg">
-                  {selected.year}
-                </span>
-                                <div className="text-right">
-                                    <div className="text-[10px] text-white/30 uppercase tracking-widest">
-                                        {selected.delay}
+                    <AnimatePresence>
+                        {selected?.year === era.year && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                            >
+                                <div className="p-4 bg-yellow-400/5 border border-yellow-400/30 my-2">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <span className="text-yellow-400 font-black text-lg">
+                                            {selected.year}
+                                        </span>
+                                        <div className="text-right">
+                                            <div className="text-[10px] text-white/30 uppercase tracking-widest">
+                                                {selected.delay}
+                                            </div>
+                                            <div className="text-[10px] text-yellow-400/60 uppercase tracking-widest">
+                                                {selected.reach}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="text-[10px] text-yellow-400/60 uppercase tracking-widest">
-                                        {selected.reach}
-                                    </div>
+                                    <p className="text-xs text-white/60 leading-relaxed">
+                                        {selected.detail}
+                                    </p>
                                 </div>
-                            </div>
-                            <p className="text-xs text-white/60 leading-relaxed">
-                                {selected.detail}
-                            </p>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </React.Fragment>
+            ))}
         </div>
     );
 }
@@ -792,7 +827,7 @@ function FanBehaviorSection() {
 
     return (
         <div>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="grid grid-cols-3 gap-3 mb-8">
                 {Object.entries(tabs).map(([key, tab]) => (
                     <button
                         key={key}
@@ -800,14 +835,16 @@ function FanBehaviorSection() {
                             setActiveTab(key as "witness" | "perform" | "record")
                         }
                         className={cn(
-                            "px-4 py-2 font-bold text-[10px] uppercase tracking-widest transition-all border",
+                            "px-4 py-3 font-bold text-[9px] uppercase tracking-widest transition-all border text-center flex items-center justify-center",
                             activeTab === key
                                 ? "bg-yellow-400 text-black border-yellow-400"
                                 : "border-white/20 text-white/50 hover:border-yellow-400/50 hover:text-yellow-400"
                         )}
                     >
-                        {tab.label}{" "}
-                        <span className="opacity-60 ml-1">({tab.period})</span>
+                        <span>
+                            {tab.label} <br />
+                            <span className="opacity-60 text-[8px]">({tab.period})</span>
+                        </span>
                     </button>
                 ))}
             </div>
@@ -933,8 +970,13 @@ export default function App() {
                                 road. He wasn&apos;t there to watch the race; he was there to{" "}
                                 <span className="text-white italic">capture</span> it.
                             </p>
-                            <ArchiveLink href="https://www.youtube.com/watch?v=S2807f4n_6U">
-                                View Original Helicopter Feed
+                            <p className="text-sm border-l border-yellow-400/30 pl-4 py-2 bg-yellow-400/5 italic">
+                                &quot;It was a strange collision, as if Guerini had run into a mirror of himself—another man with a machine, just one designed to record rather than race.&quot;
+                                <br />
+                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— L&apos;Équipe Post-Stage Report, 1999</span>
+                            </p>
+                            <ArchiveLink href="https://www.youtube.com/watch?v=4dBvJkqv0DM&t=295">
+                                View Following Camera Moto Feed
                             </ArchiveLink>
                         </div>
                     </div>
@@ -977,6 +1019,8 @@ export default function App() {
                                 &quot;The fan is so absorbed in the act of seeing through the
                                 lens that he loses the ability to see the physical reality of
                                 the road.&quot;
+                                <br />
+                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— Frank Wille, &quot;Spectator as Performer&quot; (2003)</span>
                             </div>
                             <div className="p-6 border border-white/10 bg-white/5">
                 <span className="block text-[10px] font-bold text-yellow-400 uppercase mb-2">
@@ -1026,9 +1070,27 @@ export default function App() {
                             />
                         </div>
                         <div className="mt-12">
-                            <ArchiveLink href="https://doi.org/10.1080/09523360312331360340">
-                                Source: Van Reeth (2022) Economic History Research
+                            <ArchiveLink href="https://www.ebhsoc.org/journal/index.php/ebhs/article/view/486">
+                                Source: Van Reeth (2022) TV Broadcasting of the Tour de France
                             </ArchiveLink>
+                        </div>
+                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <PrimarySourceCard
+                                id="04"
+                                type="artifact"
+                                title="Minolta Vectis S-1"
+                                date="1996–2002"
+                                description="The APS-format camera used by the fan in the 1999 collision. Represented the consumer leap into high-tech compact photography."
+                                link="https://www.camera-wiki.org/wiki/Minolta_Vectis_S-1"
+                            />
+                            <PrimarySourceCard
+                                id="05"
+                                type="text"
+                                title="ProCycling Magazine #1"
+                                date="April 1999"
+                                description="The inaugural issue's editorial on the 'Digital Tour'—predicting a decade of unprecedented fan access."
+                                link="https://www.worldcat.org/title/procycling"
+                            />
                         </div>
                     </div>
 
@@ -1082,8 +1144,8 @@ export default function App() {
                                 50-millisecond delay of a global satellite uplink. The distance
                                 between the event and the record has collapsed.
                             </p>
-                            <ArchiveLink href="https://gallica.bnf.fr/ark:/12148/cb328023051/date">
-                                Gallica BnF Archive
+                            <ArchiveLink href="https://gallica.bnf.fr/ark:/12148/bpt6k46241894">
+                                L&apos;Auto 1903 Collection (Gallica BnF)
                             </ArchiveLink>
                         </div>
                     </div>
@@ -1123,10 +1185,10 @@ export default function App() {
                                 <p className="text-white/50 leading-relaxed mb-6">
                                     One of the most durable figures in this history is the fan who
                                     runs alongside the riders. In the 90s, this behavior peaked,
-                                    becoming a recognized &quot;type&quot; in popular culture.
+                                    becoming a recognized &quot;type&quot; in popular culture. Media scholar Frank Wille (2003) argues that this &quot;performance of proximity&quot; was driven by the knowledge that the television camera would inevitably capture the fan&apos;s face for a global audience.
                                 </p>
-                                <ArchiveLink href="https://reuters.com/sports/cycling/tour-de-france-fans-warned-be-careful-after-recent-accidents-2023-07-16/">
-                                    View Incident Reports
+                                <ArchiveLink href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/">
+                                    View Incident Reports (Velo/Outside)
                                 </ArchiveLink>
                             </div>
 
@@ -1225,85 +1287,158 @@ export default function App() {
                         <ExhibitInteractive />
                     </div>
                 </section>
+
+                {/* ── Works Cited ────────────────────────────────────────────── */}
+                <section id="works-cited" className="pt-20 border-t border-white/10">
+                    <SectionHeading label="Bibliography" subtitle="Peer-reviewed and primary sources used in this exhibit.">
+                        Works <br /> Cited
+                    </SectionHeading>
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase mb-8">
+                                Primary Sources
+                            </h5>
+                            <ul className="space-y-6 text-sm text-white/50 font-serif">
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
+                                        &quot;Guerini Wins after Fan Collision.&quot; <span className="italic">Velo (Outside Online)</span>, 22 June 2022.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://gallica.bnf.fr/ark:/12148/bpt6k46241894" target="_blank" rel="noopener noreferrer">
+                                        Desgrange, Henri. &quot;Editorial: Le Tour de 1903.&quot; <span className="italic">L&apos;Auto-Vélo</span>, 1 July 1903. Gallica BnF.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.youtube.com/watch?v=4dBvJkqv0DM&t=295" target="_blank" rel="noopener noreferrer">
+                                        &quot;Giuseppe Guerini Collision Incident (Moto Feed).&quot; <span className="italic">Antenne 2 (France Télévisions)</span>, 13 July 1999.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.camera-wiki.org/wiki/Minolta_Vectis_S-1" target="_blank" rel="noopener noreferrer">
+                                        Minolta. &quot;Minolta Vectis S-1: The Future of Photography.&quot; <span className="italic">Product Catalog</span>, 1997.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.worldcat.org/title/procycling" target="_blank" rel="noopener noreferrer">
+                                        &quot;The Digital Tour.&quot; <span className="italic">ProCycling Magazine</span>, vol. 1, no. 1, Apr. 1999, pp. 12-15.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.ina.fr/ina-eclaire-actu/video/i00000001/tour-de-france-1948-arrivee-au-parc-des-princes" target="_blank" rel="noopener noreferrer">
+                                        RTF. &quot;1948 Tour de France: Parc des Princes Final.&quot; <span className="italic">Radiodiffusion-Télévision Française</span>, 25 July 1948. INA Archive.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
+                                        &quot;Tour de France: Guerini Wins on Alpe d&apos;Huez despite Crash.&quot; <span className="italic">Velo (Outside Online)</span>, 22 June 2022.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
+                                        Vandenberghe, J. &quot;Stage 10 Dispatch.&quot; <span className="italic">Referenced in Velo (Outside Online)</span>, 22 June 2022.
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase mb-8">
+                                Secondary Sources
+                            </h5>
+                            <ul className="space-y-6 text-sm text-white/50 font-serif">
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.ebhsoc.org/journal/index.php/ebhs/article/view/486" target="_blank" rel="noopener noreferrer">
+                                        Van Reeth, Daam. &quot;TV Broadcasting of the Tour de France: From Local Experiment to Global Media Product, 1948–2021.&quot; <span className="italic">Essays in Economic &amp; Business History</span>, 2022.
+                                    </a>
+                                </li>
+                                <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    <a href="https://www.taylorfrancis.com/books/edit/10.4324/9780203502419/tour-france-1903-2003-hugh-dauncey-geoff-hare" target="_blank" rel="noopener noreferrer">
+                                        Wille, Fabien. &quot;The Tour de France as an Agent of Change in Media Production.&quot; In <span className="italic">The Tour de France 1903–2003</span>, edited by Hugh Dauncey and Geoff Hare. London: Frank Cass, 2003.
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </main>
 
             {/* ── Footer ──────────────────────────────────────────────────────────── */}
             <footer className="px-6 md:px-20 py-20 border-t border-white/10 bg-white/[0.02] flex justify-center">
                 <div className="max-w-7xl w-full">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <div>
-                        <div className="flex items-center gap-2 mb-6">
-                            <div className="w-6 h-6 bg-yellow-400 flex items-center justify-center font-bold text-black text-sm">
-                                W
-                            </div>
-                            <span className="text-lg tracking-wider text-white font-bold">
+                        <div>
+                            <div className="flex items-center gap-2 mb-6">
+                                <div className="w-6 h-6 bg-yellow-400 flex items-center justify-center font-bold text-black text-sm">
+                                    W
+                                </div>
+                                <span className="text-lg tracking-wider text-white font-bold">
                 THE ARCHIVE
               </span>
+                            </div>
+                            <p className="text-xs text-white/30 leading-relaxed uppercase tracking-widest">
+                                A digital research exhibit exploring the intersection of media and
+                                athletics.
+                            </p>
                         </div>
-                        <p className="text-xs text-white/30 leading-relaxed uppercase tracking-widest">
-                            A digital research exhibit exploring the intersection of media and
-                            athletics.
+
+                        <div className="space-y-4">
+                            <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase">
+                                Project Info
+                            </h5>
+                            <ul className="text-xs text-white/30 space-y-2 uppercase tracking-widest">
+                                <li>English 102: Archival Research</li>
+                                <li>Cameron Wilson</li>
+                                <li>February 2026</li>
+                            </ul>
+                        </div>
+
+                        <div className="space-y-4">
+                            <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase">
+                                Archive Sources
+                            </h5>
+                            <ul className="text-xs text-white/30 space-y-2 uppercase tracking-widest">
+                                <li>
+                                    <a
+                                        href="https://gallica.bnf.fr/ark:/12148/bpt6k46241894"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        L&apos;Auto Digital Archives (1903–1944)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.ina.fr/recherche?q=Tour+de+France"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        INA France Media Archive
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.worldcat.org/title/cycle-sport"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        Cycle Sport Mag Repository
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4">
+                        <p className="text-[10px] text-white/20 uppercase tracking-widest">
+                            © 2026 Digital Research Collective
                         </p>
-                    </div>
-
-                    <div className="space-y-4">
-                        <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase">
-                            Project Info
-                        </h5>
-                        <ul className="text-xs text-white/30 space-y-2 uppercase tracking-widest">
-                            <li>English 102: Archival Research</li>
-                            <li>Cameron Wilson</li>
-                            <li>February 2026</li>
-                        </ul>
-                    </div>
-
-                    <div className="space-y-4">
-                        <h5 className="text-[10px] font-black text-yellow-400 tracking-[0.3em] uppercase">
-                            Archive Sources
-                        </h5>
-                        <ul className="text-xs text-white/30 space-y-2 uppercase tracking-widest">
-                            <li>
-                                <a
-                                    href="https://gallica.bnf.fr/ark:/12148/cb328023051/date"
-                                    className="hover:text-yellow-400 transition-colors"
-                                >
-                                    L&apos;Auto Digital Archives (1903–1944)
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.ina.fr/recherche?q=Tour+de+France"
-                                    className="hover:text-yellow-400 transition-colors"
-                                >
-                                    INA France Media Archive
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.worldcat.org/title/cycle-sport"
-                                    className="hover:text-yellow-400 transition-colors"
-                                >
-                                    Cycle Sport Mag Repository
-                                </a>
-                            </li>
-                        </ul>
+                        <button
+                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                            className="text-[10px] text-yellow-400 uppercase font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all"
+                        >
+                            Back to Top{" "}
+                            <Navigation2 className="w-3 h-3 -rotate-45" />
+                        </button>
                     </div>
                 </div>
-
-                <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4">
-                    <p className="text-[10px] text-white/20 uppercase tracking-widest">
-                        © 2026 Digital Research Collective
-                    </p>
-                    <button
-                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                        className="text-[10px] text-yellow-400 uppercase font-bold tracking-widest flex items-center gap-2 hover:gap-4 transition-all"
-                    >
-                        Back to Top{" "}
-                        <Navigation2 className="w-3 h-3 -rotate-45" />
-                    </button>
-                </div>
-            </div>
-        </footer>
+            </footer>
         </div>
     );
 }
