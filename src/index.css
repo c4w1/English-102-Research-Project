@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #facc15; /* Tour Yellow */
+  --bg-dark: #09090b;
+  --bg-card: #18181b;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --border: #27272a;
+}
+
+@theme {
+  --color-accent: var(--accent);
+  --color-bg-dark: var(--bg-dark);
+  --color-bg-card: var(--bg-card);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --font-serif: "Ibarra Real Nova", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-dark text-text-main font-sans antialiased selection:bg-accent selection:text-black;
+  }
+}
