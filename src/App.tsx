@@ -104,7 +104,7 @@ function useActiveSection(sections: string[]) {
 
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const active = useActiveSection(["incident", "tech", "performance", "now"]);
+    const active = useActiveSection(["incident", "tech", "performance", "now", "works-cited"]);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -432,7 +432,7 @@ function ArchiveFeedModal({ open, onClose }: ArchiveFeedModalProps) {
                             <p className="text-yellow-400/80 italic border-l-2 border-yellow-400/30 pl-4">
                                 &quot;The fan is so absorbed in the act of seeing through the
                                 lens that he loses the ability to see the physical reality of
-                                the road.&quot; — Contemporary media analysis, 2003
+                                the road.&quot; — Wille, &quot;The Tour de France as an Agent of Change in Media Production,&quot; 2003
                             </p>
                             <p>
                                 Guerini remounted and still won the stage. The image of the
@@ -971,9 +971,9 @@ export default function App() {
                                 <span className="text-white italic">capture</span> it.
                             </p>
                             <p className="text-sm border-l border-yellow-400/30 pl-4 py-2 bg-yellow-400/5 italic">
-                                &quot;It was a strange collision, as if Guerini had run into a mirror of himself—another man with a machine, just one designed to record rather than race.&quot;
+                                &quot;Guerini was nearing the final part of the stage when a spectator decided they wanted a picture of this moment. They popped out directly into Guerini&apos;s path causing both to fall to the ground.&quot;
                                 <br />
-                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— L&apos;Équipe Post-Stage Report, 1999</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— Velo (Outside Online), &quot;Collision Course,&quot; 2022</span>
                             </p>
                             <ArchiveLink href="https://www.youtube.com/watch?v=4dBvJkqv0DM&t=295">
                                 View Following Camera Moto Feed
@@ -1020,7 +1020,7 @@ export default function App() {
                                 lens that he loses the ability to see the physical reality of
                                 the road.&quot;
                                 <br />
-                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— Frank Wille, &quot;Spectator as Performer&quot; (2003)</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest mt-2 block">— Wille, &quot;The Tour de France as an Agent of Change in Media Production&quot; (2003)</span>
                             </div>
                             <div className="p-6 border border-white/10 bg-white/5">
                 <span className="block text-[10px] font-bold text-yellow-400 uppercase mb-2">
@@ -1088,8 +1088,8 @@ export default function App() {
                                 type="text"
                                 title="ProCycling Magazine #1"
                                 date="April 1999"
-                                description="The inaugural issue's editorial on the 'Digital Tour'—predicting a decade of unprecedented fan access."
-                                link="https://www.worldcat.org/title/procycling"
+                                description="The inaugural issue of ProCycling, launched April 1999 by Cabal Communications. The magazine debuted the same summer as the Guerini crash, capturing the era's collision of broadcast culture and fan fandom."
+                                link="https://procyclinguk.com/flashback-1999-tour-de-france/"
                             />
                         </div>
                     </div>
@@ -1106,7 +1106,7 @@ export default function App() {
                                 year="1948"
                                 title="First Broadcast"
                                 desc="Static cameras at the finish line. The race remains mostly invisible to the global public."
-                                detail="French state broadcaster RTF placed a single camera at the Parc des Princes velodrome. Only the final sprint was captured. The mountain climbs — the soul of the race — were entirely undocumented."
+                                detail="French state broadcaster RTF placed a single camera at the Parc des Princes velodrome for the 1948 Tour finale — the first live television broadcast of the race. The mountain climbs — the soul of the race — were entirely undocumented. The finish was captured on radio commentary archived by the Institut National de l'Audiovisuel (INA)."
                             />
                             <TimelineItem
                                 year="1985"
@@ -1169,7 +1169,7 @@ export default function App() {
                             .&quot;
                         </blockquote>
                         <cite className="text-xs font-bold tracking-[0.3em] text-white/30 uppercase">
-                            — F. Wille, 2003 Archive
+                            — Wille, &quot;The Tour de France as an Agent of Change in Media Production,&quot; 2003
                         </cite>
                     </div>
 
@@ -1193,8 +1193,8 @@ export default function App() {
                             </div>
 
                             <div className="p-10 bg-white/5 border border-white/10 relative overflow-hidden group hover:border-yellow-400 transition-colors">
-                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                                    <Camera className="w-20 h-20 text-yellow-400" />
+                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <Camera className="w-20 h-20 text-yellow-400 translate-x-4 -translate-y-4" />
                                 </div>
                                 <h4 className="text-2xl font-bold text-white mb-4 uppercase">
                                     Visual Scouting
@@ -1202,10 +1202,10 @@ export default function App() {
                                 <p className="text-white/50 leading-relaxed mb-6">
                                     Fans began to &quot;scout&quot; locations where motorcycles
                                     would be forced to slow down. They weren&apos;t just waving at
-                                    the riders — they were waving into the lens.
+                                    the riders — they were waving into the lens. The Associated Press noted in 2018 that incidents with fans at Alpe d&apos;Huez were &quot;getting bigger and bigger,&quot; tracing a direct line back to the 1999 Guerini crash.
                                 </p>
-                                <ArchiveLink href="https://www.ina.fr/recherche?q=Tour+de+France+1999">
-                                    INA French Archives (1999)
+                                <ArchiveLink href="https://www.chicagotribune.com/2018/07/20/fans-getting-out-of-control-on-tour-de-france-climbs">
+                                    AP Report: Fans Getting Out of Control (Chicago Tribune, 2018)
                                 </ArchiveLink>
                             </div>
                         </div>
@@ -1288,7 +1288,7 @@ export default function App() {
                     </div>
                 </section>
 
-                {/* ── Works Cited ────────────────────────────────────────────── */}
+                {/* ── Works Cited ────────────────────────────────────────── */}
                 <section id="works-cited" className="pt-20 border-t border-white/10">
                     <SectionHeading label="Bibliography" subtitle="Peer-reviewed and primary sources used in this exhibit.">
                         Works <br /> Cited
@@ -1300,43 +1300,51 @@ export default function App() {
                             </h5>
                             <ul className="space-y-6 text-sm text-white/50 font-serif">
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    {/* SOURCE 1 — Confirmed working Velo article */}
                                     <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
-                                        &quot;Guerini Wins after Fan Collision.&quot; <span className="italic">Velo (Outside Online)</span>, 22 June 2022.
+                                        &quot;Collision Course: The Rogue Photographer and the Tour de France Stage Winner.&quot; <span className="italic">Velo (Outside Online)</span>, 22 June 2022.
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    {/* SOURCE 2 — Confirmed working Gallica BnF */}
                                     <a href="https://gallica.bnf.fr/ark:/12148/bpt6k46241894" target="_blank" rel="noopener noreferrer">
                                         Desgrange, Henri. &quot;Editorial: Le Tour de 1903.&quot; <span className="italic">L&apos;Auto-Vélo</span>, 1 July 1903. Gallica BnF.
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    {/* SOURCE 3 — YouTube moto feed, confirmed real video */}
                                     <a href="https://www.youtube.com/watch?v=4dBvJkqv0DM&t=295" target="_blank" rel="noopener noreferrer">
-                                        &quot;Giuseppe Guerini Collision Incident (Moto Feed).&quot; <span className="italic">Antenne 2 (France Télévisions)</span>, 13 July 1999.
+                                        &quot;Giuseppe Guerini Collision Incident (Moto Feed).&quot; <span className="italic">Antenne 2 (France Télévisions)</span>, 13 July 1999. Archived on YouTube.
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
+                                    {/* SOURCE 4 — Camera-wiki confirmed exists */}
                                     <a href="https://www.camera-wiki.org/wiki/Minolta_Vectis_S-1" target="_blank" rel="noopener noreferrer">
-                                        Minolta. &quot;Minolta Vectis S-1: The Future of Photography.&quot; <span className="italic">Product Catalog</span>, 1997.
+                                        Minolta. &quot;Minolta Vectis S-1: The Future of Photography.&quot; <span className="italic">Product Catalog</span>, 1997. Camera-wiki.org.
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
-                                    <a href="https://www.worldcat.org/title/procycling" target="_blank" rel="noopener noreferrer">
-                                        &quot;The Digital Tour.&quot; <span className="italic">ProCycling Magazine</span>, vol. 1, no. 1, Apr. 1999, pp. 12-15.
+                                    {/* SOURCE 5 — procyclinguk.com 1999 Tour flashback, confirmed loading */}
+                                    <a href="https://procyclinguk.com/flashback-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
+                                        &quot;Flashback to the 1999 Tour de France.&quot; <span className="italic">ProCyclingUK</span>. Cabal Communications, 2021. [Covers Guerini incident and the inaugural 1999 season in full.]
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
-                                    <a href="https://www.ina.fr/ina-eclaire-actu/video/i00000001/tour-de-france-1948-arrivee-au-parc-des-princes" target="_blank" rel="noopener noreferrer">
-                                        RTF. &quot;1948 Tour de France: Parc des Princes Final.&quot; <span className="italic">Radiodiffusion-Télévision Française</span>, 25 July 1948. INA Archive.
+                                    {/* SOURCE 6 — INA confirmed real archive, audio not video; corrected URL */}
+                                    <a href="https://www.ina.fr/ina-eclaire-actu/audio/phd86064734/tour-de-france-cycliste-1948-21eme-etape-roubaix-paris-arrivee-au-parc-des" target="_blank" rel="noopener noreferrer">
+                                        SALLEBERT, Jacques, and Jean QUITTARD. &quot;Tour de France Cycliste 1948: 21ème étape Roubaix–Paris: Arrivée au Parc des Princes.&quot; <span className="italic">Radiodiffusion-Télévision Française</span>, 25 July 1948. INA Archive (audio broadcast).
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
-                                    <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
-                                        &quot;Tour de France: Guerini Wins on Alpe d&apos;Huez despite Crash.&quot; <span className="italic">Velo (Outside Online)</span>, 22 June 2022.
+                                    {/* SOURCE 7 — AP 2018 via Chicago Tribune, confirmed loading; explicitly names Guerini 1999 as precedent */}
+                                    <a href="https://www.chicagotribune.com/2018/07/20/fans-getting-out-of-control-on-tour-de-france-climbs" target="_blank" rel="noopener noreferrer">
+                                        Associated Press. &quot;Fans Getting Out of Control on Tour de France Climbs.&quot; <span className="italic">Chicago Tribune</span>, 20 July 2018.
                                     </a>
                                 </li>
                                 <li className="pl-8 -indent-8 transition-colors hover:text-yellow-400">
-                                    <a href="https://velo.outsideonline.com/road/road-racing/giuseppe-guerini-photographer-crash-1999-tour-de-france/" target="_blank" rel="noopener noreferrer">
-                                        Vandenberghe, J. &quot;Stage 10 Dispatch.&quot; <span className="italic">Referenced in Velo (Outside Online)</span>, 22 June 2022.
+                                    {/* SOURCE 8 — justprocycling.com directly cites Cycle Sport Sept '99 and names Eric Walkowiak; confirmed loading */}
+                                    <a href="https://justprocycling.com/2019/03/29/a-picture-speaks-500-words-1-guerini/" target="_blank" rel="noopener noreferrer">
+                                        Franchetti, Mike. &quot;A Picture Speaks 500 Words #1 – Guerini.&quot; <span className="italic">Just Pro Cycling</span>, 29 Mar. 2019. [Cites <span className="italic">Cycle Sport</span>, Sept. 1999, identifying the spectator as Eric Walkowiak.]
                                     </a>
                                 </li>
                             </ul>
@@ -1415,10 +1423,10 @@ export default function App() {
                                 </li>
                                 <li>
                                     <a
-                                        href="https://www.worldcat.org/title/cycle-sport"
+                                        href="https://procyclinguk.com/flashback-1999-tour-de-france/"
                                         className="hover:text-yellow-400 transition-colors"
                                     >
-                                        Cycle Sport Mag Repository
+                                        ProCyclingUK 1999 Season Archive
                                     </a>
                                 </li>
                             </ul>
